@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Expenses, Prisma } from '@prisma/client';
 import { PrismaService } from 'src/prisma.service';
+import { DateUtil } from 'src/share/date_util';
 
 @Injectable()
 export class ExpenseService {
@@ -21,6 +22,13 @@ export class ExpenseService {
     return await this.prisma.expenses.findMany({
       where: {
         userId: userid,
+        registrationDate: {
+          gte: DateUtil.getFirstDateOfMonth(),
+          lte: DateUtil.getLastDateOfMonth(),
+        },
+      },
+      orderBy: {
+        registrationDate: 'desc',
       },
     });
   }
