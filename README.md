@@ -43,12 +43,13 @@ Create and manage the database in docker image by pgadmin (admin web portal)
  - Passowrd: credential described in docker-compose
 
 Create the database in docker image by terminal
-$ docker exec mymoney_backend_db_1 psql -c "CREATE DATABASE mymoney" -U postgres
+$ docker exec my-money-backend-db-1 psql -c "CREATE DATABASE mymoney" -U postgres
+
+Create .env file by .env_example in the root project 
 
 Execute the migrations
 $ npx prisma migrate dev
 
-Create .env file by .env_example in projetct
 ```
 
 ## Running the app
