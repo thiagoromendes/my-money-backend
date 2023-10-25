@@ -12,15 +12,14 @@ import { UserService } from './user.service';
 import { Prisma } from '@prisma/client';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UserDto } from './dto/user.dto';
-import { Roles } from 'src/share/quard_roles';
-import { Role } from 'src/auth/roles/role';
+import { Public } from '../share/guard_public';
 
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
+  @Public()
   @Post('create')
-  //@Roles(Role.Administrator)
   async create(
     @Body() userData: Prisma.UserCreateInput,
   ): Promise<CreateUserDto> {

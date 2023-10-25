@@ -22,4 +22,13 @@ export class GoalService {
   async findAll(): Promise<Goal[]> {
     return await this.prisma.goal.findMany();
   }
+
+  async findByUser(userId: string): Promise<Goal> {
+    return await this.prisma.goal.findFirst({
+      where: {
+        userId: userId,
+      },
+      orderBy: { createdAt: 'desc' },
+    });
+  }
 }

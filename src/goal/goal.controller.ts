@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { Goal, Prisma } from '@prisma/client';
 import { GoalService } from './goal.service';
 
@@ -14,5 +14,10 @@ export class GoalController {
   @Get('findAll')
   async findAll(): Promise<Goal[]> {
     return await this.goalService.findAll();
+  }
+
+  @Get('findByUser/:id')
+  async findByUser(@Param('id') id: string): Promise<Goal> {
+    return await this.goalService.findByUser(id);
   }
 }
